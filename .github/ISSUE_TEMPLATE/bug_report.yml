@@ -1,0 +1,29 @@
+name: Bug report
+description: Report an issue with the card
+body:
+  - type: markdown
+    attributes:
+      value: Do not include passwords, tokens, camera URLs, private hostnames or unredacted logs.
+  - type: input
+    id: version
+    attributes:
+      label: Card version
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Home Assistant version and browser
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected behavior and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Minimal sanitized YAML configuration
+      render: yaml

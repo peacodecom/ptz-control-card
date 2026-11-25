@@ -1,0 +1,16 @@
+# Example entity IDs: create your own safely bounded key-press scripts.
+# This configuration is a navigation pad, not a thermostat or safety controller.
+type: custom:ptz-control-card
+title: Heating panel
+ptz_left: script.heating_panel_left
+ptz_up: script.heating_panel_up
+ptz_right: script.heating_panel_right
+ptz_down: script.heating_panel_down
+hold_mode: false
+show_center: false
+show_zoom: false
+show_preset: false
+icon_up: mdi:arrow-up-bold
+icon_right: mdi:arrow-right-bold
+icon_down: mdi:arrow-down-bold
+icon_left: mdi:arrow-left-bold
