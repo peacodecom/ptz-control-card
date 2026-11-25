@@ -1,5 +1,7 @@
 # PTZ Control Card
 
+<img src="../logo.png" alt="PTZ Control Card Logo" width="128">
+
 Schwenken, Neigen, Zoom und Presets für Home-Assistant-Dashboards – oder ein
 wiederverwendbares Vier-Wege-Bedienfeld für Geräte mit Script-Steuerung.
 
@@ -9,9 +11,10 @@ wiederverwendbares Vier-Wege-Bedienfeld für Geräte mit Script-Steuerung.
 - **Publisher:** [peacode](https://peacode.com), eine eingetragene Marke
 - **Lizenz:** [MIT](../LICENSE)
 
-![Illustration des Kartenlayouts](images/preview.svg)
+![PTZ Control Card mit Richtungstasten, Zoom und Presets im echten Dashboard](../example.png)
 
-_Layout-Illustration; Icons und Darstellung hängen von Theme und Konfiguration ab._
+_Tatsächlicher Dashboard-Screenshot. Das unkenntlich gemachte Kamerabild oberhalb
+der Steuerung stammt aus einer separaten Kamerakarte und gehört nicht zur PTZ Control Card._
 
 ## Funktionen
 

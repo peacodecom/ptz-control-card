@@ -1,5 +1,7 @@
 # PTZ Control Card
 
+<img src="logo.png" alt="PTZ Control Card logo" width="128">
+
 Pan, tilt, zoom and preset controls for Home Assistant dashboards — or a reusable
 four-way control pad for script-driven devices.
 
@@ -9,9 +11,10 @@ four-way control pad for script-driven devices.
 - **Publisher:** [peacode](https://peacode.com), a registered trademark
 - **License:** [MIT](LICENSE)
 
-![Illustration of the PTZ Control Card layout](docs/images/preview.svg)
+![PTZ Control Card with directional controls, zoom and presets in a live dashboard](example.png)
 
-_Layout illustration; icons and appearance depend on your theme and configuration._
+_Actual dashboard screenshot. The blurred camera view above the controls is
+provided by a separate camera card; it is not part of PTZ Control Card._
 
 ## Features
 
