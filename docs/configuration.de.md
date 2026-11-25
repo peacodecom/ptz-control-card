@@ -36,8 +36,13 @@ Home-Assistant-Benutzers. Alle Optionen werden im YAML der Karte gesetzt.
 | `text_center` | Preset-Name oder leer | Eigener Text in der Mitteltaste; `""` unterdrückt die Beschriftung. |
 
 Fehlende oder nicht verfügbare Entitäten sind deaktiviert, ebenso unbekannte
-Select-/Number-/Script-Zustände. Bei Buttons kann `unknown` dagegen bedeuten,
-dass sie noch nie gedrückt wurden; solche Buttons bleiben bedienbar.
+Number-/Script-Zustände. Eine Select-/Input-Select-Entität mit Zustand `unknown`
+bleibt bedienbar, wenn sie eine nicht leere `options`-Liste liefert: Preset-Entitäten
+können Befehle annehmen, ohne ein aktuelles Kamera-Preset zurückzumelden.
+Ohne Optionen bleibt eine unbekannte Preset-Entität deaktiviert. Ein festes
+`center_preset` muss weiterhin exakt einer verfügbaren Option entsprechen;
+andernfalls bleibt nur die Mitteltaste deaktiviert. Bei Buttons kann `unknown`
+bedeuten, dass sie noch nie gedrückt wurden; solche Buttons bleiben bedienbar.
 
 Buttons werden mit `button.press` bzw. `input_button.press` ausgelöst, Scripts
 mit `script.turn_on`. Für Presets gelten `select.select_option` bzw.

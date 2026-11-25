@@ -1,6 +1,6 @@
 {
   "name": "ptz-control-card",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Accessible pan, tilt, zoom and preset controls for Home Assistant dashboards",
   "type": "module",

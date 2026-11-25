@@ -75,7 +75,7 @@ The repository is intended for installation as a **Dashboard** custom repository
 
 1. Download `ptz-control-card.js` from a GitHub release, **not** from `src/`.
 2. Copy it into Home Assistant's `config/www/` directory.
-3. Add `/local/ptz-control-card.js?v=0.1.0` as a **JavaScript module** dashboard
+3. Add `/local/ptz-control-card.js?v=0.1.1` as a **JavaScript module** dashboard
    resource (or under `lovelace.resources` in YAML mode).
 4. Reload the browser. Change the query-string version after an update if needed.
 

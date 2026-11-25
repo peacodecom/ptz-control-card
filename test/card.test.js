@@ -161,6 +161,47 @@ test("preset selection finishes before the go action", async () => {
   assert.deepEqual(calls.map((c) => [c[0], c[1]]), [["select", "select_option"], ["button", "press"]]);
   assert.equal(calls[0][2].option, "Home");
 });
+for (const domain of ["select", "input_select"]) {
+  test(`unknown preset state with options remains usable for ${domain}`, async () => {
+    const entity = `${domain}.camera_preset`;
+    const { card, get, calls } = make({ preset_entity: entity, preset_go_entity: "button.camera_go", center_preset: "Home" }, { [entity]: { state: "unknown", attributes: { options: ["Home", "Patrol"] } } });
+    assert.equal(get("ptz-center").disabled, false);
+    const buttons = card.shadowRoot.querySelectorAll(".preset-btn");
+    assert.equal(buttons.length, 2);
+    assert.ok([...buttons].every((button) => !button.disabled));
+    buttons[1].click();
+    await tick();
+    assert.deepEqual(calls[0], [domain, "select_option", { entity_id: entity, option: "Patrol" }]);
+    get("ptz-center").click();
+    await tick();
+    assert.deepEqual(calls.slice(1), [[domain, "select_option", { entity_id: entity, option: "Home" }], ["button", "press", { entity_id: "button.camera_go" }]]);
+  });
+}
+test("unknown preset state without options keeps the center disabled", () => {
+  const { card, get } = make({ preset_entity: "select.camera_preset" }, { "select.camera_preset": { state: "unknown", attributes: { options: [] } } });
+  assert.equal(get("ptz-center").disabled, true);
+  assert.equal(card.shadowRoot.querySelectorAll(".preset-btn").length, 0);
+});
+test("unavailable preset entity stays disabled even with cached options", async () => {
+  const { card, get, calls } = make({ preset_entity: "select.camera_preset", preset_go_entity: "button.camera_go" }, { "select.camera_preset": { state: "unavailable", attributes: { options: ["Home", "Patrol"] } } });
+  assert.equal(get("ptz-center").disabled, true);
+  assert.ok([...card.shadowRoot.querySelectorAll(".preset-btn")].every((button) => button.disabled));
+  await card._centerAction();
+  assert.equal(calls.length, 0);
+});
+test("unknown preset state does not enable an invalid fixed center preset", () => {
+  const { card, get } = make({ preset_entity: "select.camera_preset", center_preset: "Missing" }, { "select.camera_preset": { state: "unknown", attributes: { options: ["Home", "Patrol"] } } });
+  assert.equal(get("ptz-center").disabled, true);
+  assert.ok([...card.shadowRoot.querySelectorAll(".preset-btn")].every((button) => !button.disabled));
+});
+test("preset controls recover when options arrive with an unknown state", () => {
+  const entity = "select.camera_preset";
+  const { card, get } = make({ preset_entity: entity }, { [entity]: { state: "unavailable", attributes: { options: [] } } });
+  assert.equal(get("ptz-center").disabled, true);
+  card.hass = { ...card._hass, states: { ...card._hass.states, [entity]: { state: "unknown", attributes: { options: ["Home"] } } } };
+  assert.equal(get("ptz-center").disabled, false);
+  assert.equal(card.shadowRoot.querySelector(".preset-btn").disabled, false);
+});
 test("service failure is handled and prevents preset go", async () => {
   const { card, calls } = make({ preset_entity: "select.camera_preset", preset_go_entity: "button.camera_go" }, { "select.camera_preset": { state: "Home", attributes: { options: ["Home"] } } });
   card._hass.callService = async () => { throw new Error("private backend details"); };

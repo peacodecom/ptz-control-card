@@ -76,7 +76,7 @@ Das Repository wird als benutzerdefiniertes **Dashboard**-Repository installiert
 
 1. `ptz-control-card.js` aus einem GitHub-Release herunterladen, nicht aus `src/`.
 2. In den Home-Assistant-Ordner `config/www/` kopieren.
-3. `/local/ptz-control-card.js?v=0.1.0` als **JavaScript-Modul** in den
+3. `/local/ptz-control-card.js?v=0.1.1` als **JavaScript-Modul** in den
    Dashboard-Ressourcen eintragen; bei YAML-Verwaltung unter `lovelace.resources`.
 4. Browser neu laden; bei Updates gegebenenfalls die Versionskennung ändern.
 

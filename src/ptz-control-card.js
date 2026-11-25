@@ -71,8 +71,14 @@ export class PtzControlCard extends HTMLElement {
   _isUnavailable(id) {
     const state = this._state(id);
     if (!state || state.state === "unavailable") return true;
+    if (state.state !== "unknown") return false;
+    const domain = id.split(".")[0];
+    // A preset command select may have options but no meaningful current position.
+    if (["select", "input_select"].includes(domain)) {
+      return !Array.isArray(state.attributes?.options) || state.attributes.options.length === 0;
+    }
     // Button state is its last-pressed timestamp: unknown can mean never pressed.
-    return state.state === "unknown" && !["button", "input_button"].includes(id.split(".")[0]);
+    return !["button", "input_button"].includes(domain);
   }
   _signature() {
     if (!this._config || !this._hass) return "";

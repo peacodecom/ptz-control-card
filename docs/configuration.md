@@ -34,8 +34,13 @@ Home Assistant actions using the current user's permissions.
 | `icon_center` | automatic | Center icon; defaults to `mdi:crosshairs-gps` with presets, otherwise `icon_stop`. |
 | `text_center` | preset name or empty | Custom center text. Empty string suppresses the label. |
 
-Missing or unavailable entities are disabled, as are unknown select/number/script
-states. Buttons with an `unknown` last-pressed timestamp remain usable: they may
+Missing or unavailable entities are disabled, as are unknown number/script states.
+A select/input-select entity with state `unknown` remains usable when it supplies
+a non-empty `options` list. Camera preset command entities may not report a
+current preset even though they accept preset commands. Without options, an
+unknown preset entity remains disabled. A fixed `center_preset` must still exactly
+match an available option; otherwise only the center button stays disabled.
+Buttons with an `unknown` last-pressed timestamp remain usable: they may
 simply never have been pressed. Button entities use their domain's
 `press` action, scripts use `script.turn_on`. Helpers use `input_select.select_option`
 or `input_number.set_value`; regular entities use `select.select_option` or
